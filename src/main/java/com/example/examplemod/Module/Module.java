@@ -1,7 +1,11 @@
 package com.example.examplemod.Module;
 
+import com.example.examplemod.Module.Setting;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
+
+import java.util.ArrayList;
+import java.util.Objects;
 
 public class Module {
     public String name;
@@ -73,5 +77,18 @@ public class Module {
         } else {
             this.onDisable();
         }
+    }
+    private ArrayList<Setting> settings;
+    public ArrayList<Setting> getSettings(){
+        return this.settings;
+    }
+
+    public Setting getSettingByName(String mod, String name){
+        for(Setting set : getSettings()){
+            if(set.getName().equalsIgnoreCase(name) && Objects.equals(set.getParentMod().name, mod)){
+                return set;
+            }
+        }
+        return null;
     }
 }

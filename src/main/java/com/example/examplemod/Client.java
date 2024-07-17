@@ -1,9 +1,9 @@
 package com.example.examplemod;
 
 import com.example.examplemod.Module.COMBAT.TriggerBot;
+import com.example.examplemod.Module.COMBAT.Velocity;
 import com.example.examplemod.Module.EXPLOITS.FakeCreative;
-import com.example.examplemod.Module.MOVEMENT.Fly;
-import com.example.examplemod.Module.MOVEMENT.Sprint;
+import com.example.examplemod.Module.MOVEMENT.*;
 import com.example.examplemod.Module.Module;
 import com.example.examplemod.Module.PLAYER.BlockReach;
 import com.example.examplemod.Module.PLAYER.Panic;
@@ -31,6 +31,11 @@ public class Client {
         modules.add(new Panic());
         modules.add(new FakeCreative());
         modules.add(new Fullbright());
+        modules.add(new Velocity());
+        modules.add(new Spider());
+        modules.add(new Speed());
+        modules.add(new Jesus());
+        modules.add(new AirJump());
 
         clickGui = new ClickGuiScreen();
     }
