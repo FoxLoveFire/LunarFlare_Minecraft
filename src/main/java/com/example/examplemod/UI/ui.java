@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import java.awt.*;
 
 public class ui {
+    public static boolean allowShow = true;
     @SubscribeEvent
     public void onRender(RenderGameOverlayEvent.Post e) {
         switch (e.getType()) {
@@ -23,11 +24,16 @@ public class ui {
                 FontRenderer fr = mc.fontRenderer;
                 ScaledResolution sr = new ScaledResolution(mc);
 
-                fr.drawString(Client.name, 5, 5, -1);
-                fr.drawString("FPS: " + Minecraft.getDebugFPS(), 5, 15, -1);
+                if (allowShow == true) {
+                    fr.drawString(Client.name, 5, 5, -1);
+                    fr.drawString("FPS: " + Minecraft.getDebugFPS(), 5, 15, -1);
+                }
 
                 for (Module module : Client.modules) {
                     if (module.toggled) {
+                        if (module.name == "Panic") {
+                            continue;
+                        }
                         Gui.drawRect(sr.getScaledWidth(), y, sr.getScaledWidth() - 2,
                                 y + 10, rainbow(counter[0] * 300));
 
