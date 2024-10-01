@@ -10,6 +10,7 @@ import com.example.examplemod.Module.PLAYER.Panic;
 import com.example.examplemod.Module.RENDER.Fullbright;
 import com.example.examplemod.Module.RENDER.GlowESP;
 import me.bushroot.clickgui.ClickGuiScreen;
+import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.Display;
 
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -21,7 +22,7 @@ public class Client {
     public static ClickGuiScreen clickGui;
 
     public static void startup() {
-        Display.setTitle(name);
+        Display.setTitle(name + " Player name:" + Minecraft.getMinecraft().getSession().getUsername());
 
         modules.add(new BlockReach());
         modules.add(new TriggerBot());
