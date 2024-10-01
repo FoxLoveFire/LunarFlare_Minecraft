@@ -22,7 +22,7 @@ public class Client {
     public static ClickGuiScreen clickGui;
 
     public static void startup() {
-        Display.setTitle(name + " Player name:" + Minecraft.getMinecraft().getSession().getUsername());
+        Display.setTitle(name + " Player name: " + Minecraft.getMinecraft().getSession().getUsername());
 
         modules.add(new BlockReach());
         modules.add(new TriggerBot());

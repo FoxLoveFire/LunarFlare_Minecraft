@@ -10,41 +10,41 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.awt.*;
+import java.util.Objects;
+
+import static com.example.examplemod.Module.PLAYER.Panic.isPanic;
 
 public class ui {
     public static boolean allowShow = true;
     @SubscribeEvent
     public void onRender(RenderGameOverlayEvent.Post e) {
-        switch (e.getType()) {
-            case TEXT:
-                int y = 10;
-                int counter = 0;
+        if (Objects.requireNonNull(e.getType()) == RenderGameOverlayEvent.ElementType.TEXT) {
+            int y = 10;
+            int counter = 1;
 
-                Minecraft mc = Minecraft.getMinecraft();
-                FontRenderer fr = mc.fontRenderer;
-                ScaledResolution sr = new ScaledResolution(mc);
+            Minecraft mc = Minecraft.getMinecraft();
+            FontRenderer fr = mc.fontRenderer;
+            ScaledResolution sr = new ScaledResolution(mc);
 
-                if (allowShow) {
-                    fr.drawString(Client.name, 5, 5, -1);
-                    fr.drawString("FPS: " + Minecraft.getDebugFPS(), 5, 15, -1);
-                }
+            if (allowShow && !isPanic) {
+                fr.drawStringWithShadow("FPS: " + Minecraft.getDebugFPS(), 5, 15, rainbow(counter * 300));
+                fr.drawStringWithShadow(Client.name, 5, 5, rainbow(counter * 300));
+            }
 
-                for (Module module : Client.modules) {
-                    if (module.toggled) {
-                        if (module.name == "Panic") {
-                            continue;
-                        }
-                        Gui.drawRect(sr.getScaledWidth(), y, sr.getScaledWidth() - 2,
-                                y + 10, rainbow(counter * 300));
-
-                        fr.drawStringWithShadow(module.name, sr.getScaledWidth() - 4 - fr.getStringWidth(module.name),
-                                y, rainbow(counter * 300));
-                        y += 10;
-                        counter++;
+            for (Module module : Client.modules) {
+                if (module.toggled) {
+                    if (Objects.equals(module.name, "Panic")) {
+                        continue;
                     }
+                    Gui.drawRect(sr.getScaledWidth(), y, sr.getScaledWidth() - 2,
+                            y + 10, rainbow(counter * 300));
+
+                    fr.drawStringWithShadow(module.name, sr.getScaledWidth() - 4 - fr.getStringWidth(module.name),
+                            y, rainbow(counter * 300));
+                    y += 10;
+                    counter++;
                 }
-            default:
-                break;
+            }
         }
     }
 
