@@ -18,13 +18,13 @@ public class ui {
         switch (e.getType()) {
             case TEXT:
                 int y = 10;
-                final int[] counter = {1};
+                int counter = 0;
 
                 Minecraft mc = Minecraft.getMinecraft();
                 FontRenderer fr = mc.fontRenderer;
                 ScaledResolution sr = new ScaledResolution(mc);
 
-                if (allowShow == true) {
+                if (allowShow) {
                     fr.drawString(Client.name, 5, 5, -1);
                     fr.drawString("FPS: " + Minecraft.getDebugFPS(), 5, 15, -1);
                 }
@@ -35,12 +35,12 @@ public class ui {
                             continue;
                         }
                         Gui.drawRect(sr.getScaledWidth(), y, sr.getScaledWidth() - 2,
-                                y + 10, rainbow(counter[0] * 300));
+                                y + 10, rainbow(counter * 300));
 
                         fr.drawStringWithShadow(module.name, sr.getScaledWidth() - 4 - fr.getStringWidth(module.name),
-                                y, rainbow(counter[0] * 300));
+                                y, rainbow(counter * 300));
                         y += 10;
-                        counter[0]++;
+                        counter++;
                     }
                 }
             default:
