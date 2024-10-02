@@ -29,3 +29,4 @@ Also in the runClient configuration you can provide arguments
 --username "USERNAME"
 --userType "mojan"
 ```
+Copyright of cheats created by the user: [bush1root](https://github.com/bush1root)
