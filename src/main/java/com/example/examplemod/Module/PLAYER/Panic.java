@@ -4,6 +4,9 @@ import com.example.examplemod.Client;
 import com.example.examplemod.Module.Module;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
+import com.example.examplemod.Module.RegisterCheat;
+
+import java.util.Map;
 
 public class Panic extends Module {
     public static boolean isPanic = false;
@@ -16,11 +19,11 @@ public class Panic extends Module {
     public void onEnable() {
         Display.setTitle("Minecraft 1.12.2");
         isPanic = true;
-        for (Module m: Client.modules)
+        for (Map.Entry<Module, String> m : RegisterCheat.mods)
         {
-            if (m != this)
+            if (m.getKey() != this)
             {
-                m.setToggled(false);
+                m.getKey().setToggled(false);
             }
         }
     }

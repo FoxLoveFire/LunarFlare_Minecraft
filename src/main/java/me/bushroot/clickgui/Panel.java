@@ -1,6 +1,6 @@
 package me.bushroot.clickgui;
 
-import com.example.examplemod.Client;
+
 import com.example.examplemod.Module.Module;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -9,6 +9,9 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import com.example.examplemod.Module.RegisterCheat;
 
 public class Panel {
     public Minecraft mc = Minecraft.getMinecraft();
@@ -28,9 +31,9 @@ public class Panel {
 
         int y1 = y + height;
 
-        for (Module module : Client.modules) {
-            if (module.category == category) {
-                buttons.add(new me.bushroot.clickgui.Button(x, y1, width, height, module));
+        for (Map.Entry<Module, String> module : RegisterCheat.mods) {
+            if (module.getKey().category == category) {
+                buttons.add(new me.bushroot.clickgui.Button(x, y1, width, height, module.getKey()));
                 y1 += height;
             }
         }

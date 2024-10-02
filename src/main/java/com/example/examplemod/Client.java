@@ -13,38 +13,40 @@ import me.bushroot.clickgui.ClickGuiScreen;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.Display;
 
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.Map;
+
+import static com.example.examplemod.Module.RegisterCheat.mods;
+import static com.example.examplemod.Module.RegisterCheat.registerCheat;
 
 public class Client {
     public static String name = "LunarFlare 1.12.2";
-    public static CopyOnWriteArrayList<Module> modules = new CopyOnWriteArrayList<Module>();
 
     public static ClickGuiScreen clickGui;
 
     public static void startup() {
         Display.setTitle(name + " Player name: " + Minecraft.getMinecraft().getSession().getUsername());
 
-        modules.add(new BlockReach());
-        modules.add(new TriggerBot());
-        modules.add(new GlowESP());
-        modules.add(new Sprint());
-        modules.add(new Fly());
-        modules.add(new Panic());
-        modules.add(new FakeCreative());
-        modules.add(new Fullbright());
-        modules.add(new Velocity());
-        modules.add(new Spider());
-        modules.add(new Speed());
-        modules.add(new Jesus());
-        modules.add(new AirJump());
+        registerCheat(new BlockReach(), "Block Reach");
+        registerCheat(new TriggerBot(), "Trigger Bot");
+        registerCheat(new GlowESP(), "Glow ESP");
+        registerCheat(new Sprint(), "Sprint");
+        registerCheat(new Fly(), "Fly");
+        registerCheat(new Panic(), "Panic");
+        registerCheat(new FakeCreative(), "Fake Creative");
+        registerCheat(new Fullbright(), "Fullbright");
+        registerCheat(new Velocity(), "Velocity");
+        registerCheat(new Spider(), "Spider");
+        registerCheat(new Speed(), "Speed");
+        registerCheat(new Jesus(), "Jesus");
+        registerCheat(new AirJump(), "Air jump");
 
         clickGui = new ClickGuiScreen();
     }
 
     public static void keyPress(int key) {
-        for (Module m : modules) {
-            if (m.getKey() == key) {
-                m.toggle();
+        for (Map.Entry<Module, String> entry : mods) {
+            if (entry.getKey().getKey() == key) {
+                entry.getKey().toggle();
             }
         }
     }
