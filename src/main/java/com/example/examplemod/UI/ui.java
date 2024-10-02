@@ -17,7 +17,6 @@ import java.util.Objects;
 import static com.example.examplemod.Module.PLAYER.Panic.isPanic;
 
 public class ui {
-    public static boolean allowShow = true;
     @SubscribeEvent
     public void onRender(RenderGameOverlayEvent.Post e) {
         if (Objects.requireNonNull(e.getType()) == RenderGameOverlayEvent.ElementType.TEXT) {
