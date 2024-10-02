@@ -1,12 +1,16 @@
 package me.bushroot.clickgui;
 
 import com.example.examplemod.Module.Module;
+import com.example.examplemod.Module.RegisterCheat;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import org.lwjgl.input.Keyboard;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.Map;
+
+import static com.example.examplemod.Module.RegisterCheat.mods;
 
 public class Button {
     public Minecraft mc = Minecraft.getMinecraft();
@@ -49,6 +53,17 @@ public class Button {
         }
     }
 
-    protected void mouseReleased(int mouseX, int mouseY, int state) {
+    protected void mouseReleased(int mouseX, int mouseY, int state) {}
+
+    public void drawTooltip(int mouseX, int mouseY) {
+        if (HoverUtils.hovered(mouseX, mouseY, x, y, x + width, y + height)) {
+            for (Map.Entry<Module, String> entry : RegisterCheat.mods) {
+                if (entry.getKey() == module) {
+                    int tooltipY = mouseY - Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT;
+                    Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(entry.getValue(), mouseX + 10, tooltipY, -1);
+                    break;
+                }
+            }
+        }
     }
 }

@@ -45,10 +45,9 @@ public class Panel {
             y = mouseY - dragY;
         }
 
-        int[] arr = {0x008000, 0x0000FF, 0xFF0000, 0xFFA500, 0x800080, 0xFFFF00, 0xFF8033};
+        Gui.drawRect(x, y, x + width, y + height, new Color(0, 0, 0, 155).getRGB());
+        drawOutline(x, y, x + width, y + height, 1, 0xFF000000);
 
-        // Gui.drawRect(x, y, x + width, y + height, Hud.rainbow(300 * 20));
-        Gui.drawRect(x, y, x + width, y + height, new Color(arr[size]).hashCode());
         mc.fontRenderer.drawStringWithShadow(category.name(), x + width / 2 - mc.fontRenderer.getStringWidth(category.name()) / 2, y + height / 2 - 9 / 2, -1);
 
         if (extended) {
@@ -60,8 +59,17 @@ public class Panel {
                 y1 += height;
 
                 button.drawScreen(mouseX, mouseY, partialTicks);
+                button.drawTooltip(mouseX, mouseY);
             }
         }
+    }
+
+    // Helper method to draw an outline around a rectangle
+    private void drawOutline(int x1, int y1, int x2, int y2, int thickness, int color) {
+        Gui.drawRect(x1 - thickness, y1 - thickness, x2 + thickness, y1, color);
+        Gui.drawRect(x1 - thickness, y2, x2 + thickness, y2 + thickness, color);
+        Gui.drawRect(x1 - thickness, y1, x1, y2, color);
+        Gui.drawRect(x2, y1, x2 + thickness, y2, color);
     }
 
     protected void keyTyped(char typedChar, int keyCode) throws IOException {
