@@ -26,7 +26,7 @@ public class ui {
             FontRenderer fr = mc.fontRenderer;
             ScaledResolution sr = new ScaledResolution(mc);
 
-            if (allowShow && !isPanic) {
+            if (!Minecraft.getMinecraft().gameSettings.showDebugInfo && !isPanic) {
                 fr.drawStringWithShadow("FPS: " + Minecraft.getDebugFPS(), 5, 15, rainbow(counter * 300));
                 fr.drawStringWithShadow(Client.name, 5, 5, rainbow(counter * 300));
             }
